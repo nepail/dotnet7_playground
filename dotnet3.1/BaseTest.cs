@@ -4,7 +4,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace dotnet31
 {
-    [MemoryDiagnoser]
+    [MemoryDiagnoser(false)]
     public class BaseTest
     {
         private readonly Animal animal = new Animal("dog");
@@ -14,8 +14,8 @@ namespace dotnet31
             typeof(Animal).GetMethod("SetName", BindingFlags.NonPublic | BindingFlags.Instance);
 
         private readonly ConstructorInfo _c = typeof(Animal).GetConstructor(
-            BindingFlags.NonPublic | BindingFlags.Instance, null,
-            new Type[] { typeof(string) }, null);
+            BindingFlags.NonPublic | BindingFlags.Instance,
+            new Type[] { typeof(string) });
         
         
         [Benchmark]
@@ -47,8 +47,8 @@ namespace dotnet31
         [Benchmark]
         public Animal GetAnimal()
         {
-            return (Animal)typeof(Animal).GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null,
-                    new Type[] { typeof(string) }, null)
+            return (Animal)typeof(Animal).GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, 
+                    new Type[] { typeof(string) })
                 .Invoke(new object?[] { "cattwo" });
         }
         
