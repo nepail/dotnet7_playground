@@ -7,4 +7,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Compile Update="dotnet3.1\Program.cs">
+        <Link>ConsoleApp1\Program.cs</Link>
+      </Compile>
+    </ItemGroup>
+
 </Project>
